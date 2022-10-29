@@ -4,7 +4,6 @@ import com.example.mynote.register.request.Completed
 import com.example.mynote.register.request.Description
 import com.example.mynote.register.request.Register
 import com.example.mynote.register.retrofit.ApiService
-import com.example.mynote.task.data.Data
 import javax.inject.Inject
 
 class Repository @Inject constructor(private val apiService: ApiService) {

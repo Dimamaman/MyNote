@@ -3,10 +3,8 @@ package com.example.mynote.fragments
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.mynote.R
 import com.example.mynote.databinding.FragmentMeBinding
 

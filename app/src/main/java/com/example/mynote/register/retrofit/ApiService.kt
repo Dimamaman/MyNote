@@ -5,7 +5,6 @@ import com.example.mynote.register.request.Description
 import com.example.mynote.register.request.Register
 import com.example.mynote.register.request.UpdataTask
 import com.example.mynote.register.response.Login
-import com.example.mynote.task.data.Data
 import com.example.mynote.task.data.GetAllTask
 import com.example.mynote.task.data.Task
 import retrofit2.Response

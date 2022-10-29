@@ -3,7 +3,6 @@ package com.example
 import android.app.Application
 import com.example.mynote.di.networkModule
 import com.example.mynote.di.viewModelModule
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties

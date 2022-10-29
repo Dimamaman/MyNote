@@ -3,16 +3,14 @@ package com.example.mynote
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.example.mynote.register.core.NetworkResult
-import com.example.mynote.register.request.Register
 import com.example.mynote.databinding.ActivityRegisterBinding
 import com.example.mynote.register.core.Constants
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.mynote.register.core.NetworkResult
+import com.example.mynote.register.request.Register
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterActivity : AppCompatActivity() {
