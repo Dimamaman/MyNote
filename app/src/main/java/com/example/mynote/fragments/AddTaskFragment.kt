@@ -3,7 +3,6 @@ package com.example.mynote.fragments
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -12,18 +11,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.mynote.R
 import com.example.mynote.databinding.FragmentAddTaskBinding
-import com.example.mynote.register.core.Constants
 import com.example.mynote.register.core.NetworkResult
 import com.example.mynote.register.request.Description
-import com.example.mynote.task.data.Data
-import com.example.mynote.task.data.Task
-import com.example.mynote.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AddTaskFragment : Fragment(R.layout.fragment_add_task) {
     private lateinit var binding: FragmentAddTaskBinding
-    private val mainViewModel: MainViewModel by viewModels()
+    private val mainViewModel: AddTaskViewModelFragment by viewModels()
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

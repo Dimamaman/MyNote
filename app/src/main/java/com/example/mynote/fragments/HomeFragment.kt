@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -13,20 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mynote.R
 import com.example.mynote.adapter.TaskAdapter
 import com.example.mynote.databinding.FragmentHomeBinding
-import com.example.mynote.fragments.HomeFragmentDirections.ActionHomeFragmentToUpdateFragment
 import com.example.mynote.register.core.Constants
 import com.example.mynote.register.core.Constants.TOKEN
 import com.example.mynote.register.core.NetworkResult
 import com.example.mynote.register.request.Completed
 import com.example.mynote.task.data.Data
-import com.example.mynote.task.data.Task
-import com.example.mynote.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home),TaskAdapter.onItemClickListener {
     private lateinit var binding: FragmentHomeBinding
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: HomeViewModelFragment by viewModels()
     private val taskAdapter = TaskAdapter(this)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

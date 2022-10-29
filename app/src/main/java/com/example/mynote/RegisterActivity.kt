@@ -12,14 +12,13 @@ import com.example.mynote.register.core.NetworkResult
 import com.example.mynote.register.request.Register
 import com.example.mynote.databinding.ActivityRegisterBinding
 import com.example.mynote.register.core.Constants
-import com.example.mynote.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var sharedPreferences: SharedPreferences
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: RegisterViewModelActivity by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
