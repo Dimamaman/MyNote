@@ -13,12 +13,12 @@ import com.example.mynote.register.request.Register
 import com.example.mynote.databinding.ActivityRegisterBinding
 import com.example.mynote.register.core.Constants
 import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var sharedPreferences: SharedPreferences
-    private val viewModel: RegisterViewModelActivity by viewModels()
+    private val registerViewModelActivity: RegisterViewModelActivity by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +36,8 @@ class RegisterActivity : AppCompatActivity() {
                     age1.text.toString().toInt()
                 )
 
-                viewModel.registerUser(user)
-                viewModel.registerUser.observe(this@RegisterActivity) {
+                registerViewModelActivity.registerUser(user)
+                registerViewModelActivity.registerUser.observe(this@RegisterActivity) {
                     when (it) {
                         is NetworkResult.Succes -> {
                             Toast.makeText(

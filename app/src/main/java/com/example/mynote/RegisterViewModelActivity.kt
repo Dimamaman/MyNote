@@ -8,12 +8,9 @@ import com.example.mynote.register.Repository
 import com.example.mynote.register.core.NetworkResult
 import com.example.mynote.register.request.Register
 import com.example.mynote.register.response.Login
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class RegisterViewModelActivity @Inject constructor(val repository: Repository): ViewModel() {
+class RegisterViewModelActivity(val repository: Repository): ViewModel() {
     private val _registerUser: MutableLiveData<NetworkResult<Login>> = MutableLiveData()
     val registerUser: LiveData<NetworkResult<Login>> = _registerUser
 

@@ -12,11 +12,11 @@ import com.example.mynote.databinding.FragmentUpdateBinding
 import com.example.mynote.register.core.Constants
 import com.example.mynote.register.request.Completed
 import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class UpdateFragment : Fragment(R.layout.fragment_update) {
     private lateinit var binding: FragmentUpdateBinding
-    private val mainViewModel: UpdateViewModelFragment by viewModels()
+    private val updateViewModelFragment: UpdateViewModelFragment by viewModel()
     val args: UpdateFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,7 +29,7 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
             etUpdate.setText(update)
 
             btnUpdate.setOnClickListener {
-                mainViewModel.updateTaskById("${args.task.id}","${Constants.TOKEN}", Completed(true))
+                updateViewModelFragment.updateTaskById("${args.task.id}","${Constants.TOKEN}", Completed(true))
                 findNavController().navigate(R.id.action_updateFragment_to_homeFragment)
             }
         }

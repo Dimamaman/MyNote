@@ -10,12 +10,9 @@ import com.example.mynote.register.request.Completed
 import com.example.mynote.register.request.UpdataTask
 import com.example.mynote.task.data.GetAllTask
 import com.example.mynote.task.data.Task
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class HomeViewModelFragment @Inject constructor(val repository: Repository): ViewModel() {
+class HomeViewModelFragment (val repository: Repository): ViewModel() {
     private val _getAllTask: MutableLiveData<NetworkResult<GetAllTask>> = MutableLiveData()
     val getAllTask: LiveData<NetworkResult<GetAllTask>> = _getAllTask
 

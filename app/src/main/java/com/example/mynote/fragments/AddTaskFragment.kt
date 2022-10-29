@@ -7,18 +7,16 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.mynote.R
 import com.example.mynote.databinding.FragmentAddTaskBinding
 import com.example.mynote.register.core.NetworkResult
 import com.example.mynote.register.request.Description
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class AddTaskFragment : Fragment(R.layout.fragment_add_task) {
     private lateinit var binding: FragmentAddTaskBinding
-    private val mainViewModel: AddTaskViewModelFragment by viewModels()
+    private val addTaskViewModelFragment: AddTaskViewModelFragment by viewModel()
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,7 +27,7 @@ class AddTaskFragment : Fragment(R.layout.fragment_add_task) {
 
         binding.apply {
             addTask.setOnClickListener {
-                mainViewModel.addTask.observe(requireActivity()) {
+                addTaskViewModelFragment.addTask.observe(requireActivity()) {
                     when (it) {
                         is NetworkResult.Succes -> {
                             Toast.makeText(requireContext(), "Task Saved", Toast.LENGTH_SHORT)
@@ -43,7 +41,7 @@ class AddTaskFragment : Fragment(R.layout.fragment_add_task) {
                     }
                 }
                 Log.d("SSS","-----> ${token.toString()}")
-                mainViewModel.addTask("Bearer $token", Description(task1.text.toString()))
+                addTaskViewModelFragment.addTask("Bearer $token", Description(task1.text.toString()))
             }
         }
     }

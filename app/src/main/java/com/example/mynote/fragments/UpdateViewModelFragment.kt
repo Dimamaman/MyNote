@@ -8,12 +8,10 @@ import com.example.mynote.register.Repository
 import com.example.mynote.register.core.NetworkResult
 import com.example.mynote.register.request.Completed
 import com.example.mynote.register.request.UpdataTask
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class UpdateViewModelFragment @Inject constructor(val repository: Repository): ViewModel() {
+
+class UpdateViewModelFragment (val repository: Repository): ViewModel() {
 
     private val _updateTaskById: MutableLiveData<NetworkResult<UpdataTask>> = MutableLiveData()
     val updataTaskById: LiveData<NetworkResult<UpdataTask>> = _updateTaskById

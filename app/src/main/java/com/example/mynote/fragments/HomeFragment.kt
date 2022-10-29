@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,38 +16,18 @@ import com.example.mynote.register.core.Constants.TOKEN
 import com.example.mynote.register.core.NetworkResult
 import com.example.mynote.register.request.Completed
 import com.example.mynote.task.data.Data
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
+
 class HomeFragment : Fragment(R.layout.fragment_home),TaskAdapter.onItemClickListener {
     private lateinit var binding: FragmentHomeBinding
-    private val viewModel: HomeViewModelFragment by viewModels()
+    private val homeViewModelFragment: HomeViewModelFragment by viewModel()
     private val taskAdapter = TaskAdapter(this)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
-
         initRec()
-
-//        taskAdapter.isChecked { data ->
-//            viewModel.updateTaskById("${data.id}","${Constants.TOKEN}", Completed(true))
-//            Log.d("QQQ","----> ${data.id}")
-//            Log.d("PPP","---> ${data.completed}")
-//
-//            viewModel.updataTaskById.observe(requireActivity()) {
-//                when(it) {
-//                    is NetworkResult.Succes -> {
-//                        Toast.makeText(requireContext(), "Updated", Toast.LENGTH_SHORT).show()
-//
-//                    }
-//                    is NetworkResult.Error -> {
-//                        Toast.makeText(requireContext(), "Error Update Task", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }
-//        }
-
-        viewModel.getAllTask.observe(requireActivity()) {
+        homeViewModelFragment.getAllTask.observe(requireActivity()) {
             when(it) {
                 is NetworkResult.Succes -> {
                     taskAdapter.model = it.data?.data ?: mutableListOf()
@@ -60,7 +39,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),TaskAdapter.onItemClickLis
         }
         Log.d("UUU","---> ${Constants.TOKEN}")
 
-        viewModel.getAllTask("${Constants.TOKEN}")
+        homeViewModelFragment.getAllTask("${Constants.TOKEN}")
 
         binding.apply {
             addFloatingBtn.setOnClickListener {
@@ -69,8 +48,8 @@ class HomeFragment : Fragment(R.layout.fragment_home),TaskAdapter.onItemClickLis
         }
 
         taskAdapter.removeItemClick { data, position ->
-            viewModel.deleteTaskById("${data.id}","${Constants.TOKEN}")
-            viewModel.deleteTaskById.observe(requireActivity()) {
+            homeViewModelFragment.deleteTaskById("${data.id}","${Constants.TOKEN}")
+            homeViewModelFragment.deleteTaskById.observe(requireActivity()) {
                 when(it) {
                     is NetworkResult.Succes -> {
                         Toast.makeText(requireContext(), "Task Deleted", Toast.LENGTH_SHORT).show()
@@ -84,13 +63,13 @@ class HomeFragment : Fragment(R.layout.fragment_home),TaskAdapter.onItemClickLis
         }
 
         taskAdapter.setOnCheckboxClickListener {
-            viewModel.updateTaskById(it.id, "Bearer $TOKEN", Completed(true))
+            homeViewModelFragment.updateTaskById(it.id, "Bearer $TOKEN", Completed(true))
 
-            viewModel.updataTaskById.observe(requireActivity()) {
+            homeViewModelFragment.updataTaskById.observe(requireActivity()) {
                 when(it) {
                     is NetworkResult.Succes -> {
                         Toast.makeText(requireContext(), "Updated", Toast.LENGTH_SHORT).show()
-                        viewModel.getAllTask("Bearer $TOKEN")
+                        homeViewModelFragment.getAllTask("Bearer $TOKEN")
                     }
                     is NetworkResult.Error -> {
                         Toast.makeText(requireContext(), "Error Update Task", Toast.LENGTH_SHORT).show()
