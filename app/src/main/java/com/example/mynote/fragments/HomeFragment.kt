@@ -16,13 +16,14 @@ import com.example.mynote.register.core.Constants.TOKEN
 import com.example.mynote.register.core.NetworkResult
 import com.example.mynote.register.request.Completed
 import com.example.mynote.task.data.Data
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class HomeFragment : Fragment(R.layout.fragment_home),TaskAdapter.onItemClickListener {
+class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private val homeViewModelFragment: HomeViewModelFragment by viewModel()
-    private val taskAdapter = TaskAdapter(this)
+    private val taskAdapter: TaskAdapter by inject()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
@@ -77,6 +78,10 @@ class HomeFragment : Fragment(R.layout.fragment_home),TaskAdapter.onItemClickLis
                 }
             }
         }
+        taskAdapter.onItemClick {
+            val action = HomeFragmentDirections.actionHomeFragmentToUpdateFragment(it)
+            findNavController().navigate(action)
+        }
     }
 
     private fun initRec() {
@@ -85,15 +90,5 @@ class HomeFragment : Fragment(R.layout.fragment_home),TaskAdapter.onItemClickLis
             recyclerview.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
             recyclerview.addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL))
         }
-    }
-
-    override fun onItemClick(task: Data) {
-//        val bundle = bundleOf("task" to task)
-        val action = HomeFragmentDirections.actionHomeFragmentToUpdateFragment(task)
-        findNavController().navigate(action)
-    }
-
-    override fun onCheckBoxClick(task: Data, isChecked: Completed) {
-//        viewModel.updateTaskById(task.id,"${Constants.TOKEN}", Completed(true))
     }
 }

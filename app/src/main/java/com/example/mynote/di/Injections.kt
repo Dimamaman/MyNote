@@ -1,6 +1,7 @@
 package com.example.mynote.di
 
 import com.example.mynote.RegisterViewModelActivity
+import com.example.mynote.adapter.TaskAdapter
 import com.example.mynote.fragments.AddTaskViewModelFragment
 import com.example.mynote.fragments.HomeViewModelFragment
 import com.example.mynote.fragments.UpdateViewModelFragment
@@ -46,4 +47,8 @@ val viewModelModule = module {
     viewModel { HomeViewModelFragment(get()) }
     viewModel { UpdateViewModelFragment(get()) }
     viewModel {RegisterViewModelActivity(get())}
+}
+
+val adapterModule = module {
+    single { TaskAdapter() }
 }

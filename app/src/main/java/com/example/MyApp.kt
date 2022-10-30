@@ -1,6 +1,7 @@
 package com.example
 
 import android.app.Application
+import com.example.mynote.di.adapterModule
 import com.example.mynote.di.networkModule
 import com.example.mynote.di.viewModelModule
 import dagger.hilt.android.HiltAndroidApp
@@ -14,7 +15,7 @@ class MyApp: Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val modules = listOf(networkModule, viewModelModule)
+        val modules = listOf(networkModule, viewModelModule, adapterModule)
 
         startKoin {
             androidLogger()

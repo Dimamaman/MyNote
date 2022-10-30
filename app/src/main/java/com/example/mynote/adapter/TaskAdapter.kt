@@ -9,8 +9,11 @@ import com.example.mynote.R
 import com.example.mynote.databinding.TaskLayoutBinding
 import com.example.mynote.register.request.Completed
 import com.example.mynote.task.data.Data
+import com.example.mynote.task.data.Task
+import kotlinx.coroutines.coroutineScope
+import org.koin.core.scope.Scope
 
-class TaskAdapter(private val listener: onItemClickListener) : RecyclerView.Adapter<TaskAdapter.VH>() {
+class TaskAdapter : RecyclerView.Adapter<TaskAdapter.VH>() {
     var model: MutableList<Data> = mutableListOf()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
@@ -49,14 +52,14 @@ class TaskAdapter(private val listener: onItemClickListener) : RecyclerView.Adap
             }
 
             root.setOnClickListener {
-                listener.onItemClick(task)
+                onItemClick.invoke(task)
             }
         }
     }
 
-    interface onItemClickListener {
-        fun onItemClick(task: Data)
-        fun onCheckBoxClick(task: Data,isChecked: Completed)
+    var onItemClick: (Data) -> Unit = {}
+    fun onItemClick(onItemClick: (Data) -> Unit) {
+        this.onItemClick = onItemClick
     }
 
     private var onClick: (data: Data, position: Int) -> Unit = { soz, position ->}
@@ -76,3 +79,4 @@ class TaskAdapter(private val listener: onItemClickListener) : RecyclerView.Adap
         this.onCheckboxClick = onCheckboxClick
     }
 }
+
